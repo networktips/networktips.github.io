@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script type="text/javascript">
+    var host = "networktips.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:")) {
+      window.location.protocol = "https";
+    }
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>TCP/UDP Sockets - Linux ◦ Network Tips</title>
+  <meta name="description" content="A network socket is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the Inte...">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="https://networktips.github.io/articles/sockets-linux/">
+  <link rel="alternate" type="application/rss+xml" title="Network Tips" href="https://networktips.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky clearfix">
+    <div class="sidebar-about">
+      <h1 class="site-title">Network Tips</h1>
+      <p class="lead">Tips and tutorials about networking classes of ESTG-IPVC with proper syntax highlighted.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+        <a href="/">Home</a>
+      </li>
+
+      
+
+      
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/about/">About</a>
+            </li>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/search/">Search</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    </ul>
+
+    <p>&copy; 2016. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="wrapper">
+      <div class="content container">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">TCP/UDP Sockets - Linux</h1>
+    <p class="post-meta"><time datetime="2016-01-20T16:16:01+00:00" itemprop="datePublished">Jan 20, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>A <a href="https://en.wikipedia.org/wiki/Network_socket">network socket</a> is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the <a href="https://en.wikipedia.org/wiki/Internet_Protocol">Internet Protocol</a>, therefore most network sockets are Internet sockets. A socket address is the combination of an <a href="https://en.wikipedia.org/wiki/Internet_Protocol">IP</a> address and a <a href="https://en.wikipedia.org/wiki/Port_(computer_networking)">port</a> number. Based on this address, internet sockets deliver incoming data <a href="https://en.wikipedia.org/wiki/Network_packet">packets</a> to the appropriate application <a href="https://en.wikipedia.org/wiki/Process_(computing)">process</a> or <a href="https://en.wikipedia.org/wiki/Thread_(computing)">thread</a>.</p>
+
+<p>If you want generic sockets written in Python, Perl, C and Java <a href="//www.prasannatech.net/2008/07/socket-programming-tutorial.html">click here</a>.</p>
+
+<h3 id="udp">UDP</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a> is a simple transport-layer protocol. The application writes a message to a <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a> socket, which is then encapsulated in a <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a> datagram, which is further encapsulated in an IP datagram, which is sent to the destination.
+There is no guarantee that a <a href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a> will reach the destination, that the order of the datagrams will be preserved across the network or that datagrams arrive only once.</p>
+
+<h3 id="udp-socket-api">UDP Socket API</h3>
+
+<p>As shown in the Figure 1, the steps of establishing a UDP socket communication on the client side are as follows:</p>
+
+<ul>
+  <li>Create a socket using the socket() function;</li>
+  <li>Send and receive data by means of the recvfrom() and sendto() functions.</li>
+</ul>
+
+<p class="center"><img src="//www.cs.dartmouth.edu/~campbell/cs60/UDPsockets.jpg" alt="tcp server" />
+<em><strong>Figure 1:</strong> UDP client-server.</em></p>
+
+<h3 id="tcp">TCP</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> provides a connection oriented service, since it is based on connections between clients and servers.
+<a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> provides reliability. When a <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> client send data to the server, it requires an acknowledgement in return. If an acknowledgement is not received, <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> automatically retransmit the data and waits for a longer period of time.</p>
+
+<h3 id="tcp-socket-api">TCP Socket API</h3>
+
+<p>The sequence of function calls for the client and a server participating in a TCP connection is presented in Figure 2.</p>
+
+<p class="center"><img src="//www.cs.dartmouth.edu/~campbell/cs60/TCPsockets.jpg" alt="tcp server" />
+<em><strong>Figure 2:</strong> TCP client-server.</em></p>
+
+<p>As shown in the figure, the steps for establishing a TCP socket on the client side are the following:</p>
+
+<ul>
+  <li>Create a socket using the socket() function;</li>
+  <li>Connect the socket to the address of the server using the connect() function;</li>
+  <li>Send and receive data by means of the read() and write() functions.</li>
+  <li>Close the connection by means of the close() function.</li>
+</ul>
+
+<p>The steps involved in establishing a TCP socket on the server side are as follows:</p>
+
+<ul>
+  <li>Create a socket with the socket() function;</li>
+  <li>Bind the socket to an address using the bind() function;</li>
+  <li>Listen for connections with the listen() function;</li>
+  <li>Accept a connection with the accept() function. This call typically blocks until a client connects with the server.</li>
+  <li>Send and receive data by means of write() and read().</li>
+  <li>Close the connection by means of the close() function.</li>
+</ul>
+
+  </div>
+
+  <hr>
+<div class="social-content">
+  <h3 class="social-title">Share this:</h3>
+  <div class="social-wrapper">
+    <a class="facebook" target="_blank" href="http://www.facebook.com/share.php?u=https://networktips.github.io/articles/sockets-linux&title=TCP/UDP Sockets - Linux"><i class="ion ion-social-facebook"></i>Share</a>
+    <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=TCP/UDP Sockets - Linux: https://networktips.github.io/articles/sockets-linux"><i class="ion ion-social-twitter"></i>Tweet</a>
+    <a class="googleplus" target="_blank" href="https://plus.google.com/share?url=https://networktips.github.io/articles/sockets-linux"><i class="ion ion-social-googleplus"></i>Share</a>
+  </div>
+</div>
+<hr>
+
+
+  <div class="post-navigation">
+    
+      <a class="prev" href="/articles/dns-server-linux/">&laquo; Setup a DNS server - Linux</a>
+    
+    
+      <a class="next" href="/articles/dhcp-server-linux/">Setup a DHCP server - Linux &raquo;</a>
+    
+  </div>
+
+  <div class="comments-content">
+	<div class="comments-wrapper">
+		<div id="disqus_thread"></div>
+		<script>
+			var disqus_config = function () {
+				this.page.url = "https://networktips.github.io/articles/sockets-linux";
+				this.page.identifier = "/articles/sockets-linux";
+			};
+
+			(function() { // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+
+				s.src = '//ruisaraiva19.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+	</div>
+</div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js" defer></script>
+    <script type="text/javascript" src="/assets/js/main.min.js" defer></script>
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-78120059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+
+</html>

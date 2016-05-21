@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script type="text/javascript">
+    var host = "networktips.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:")) {
+      window.location.protocol = "https";
+    }
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Setup a Email server - Linux ◦ Network Tips</title>
+  <meta name="description" content="Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic mail (email) transmission. SMTP by default uses TCP port 25. The protocol for mai...">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="https://networktips.github.io/articles/mail-server-linux/">
+  <link rel="alternate" type="application/rss+xml" title="Network Tips" href="https://networktips.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky clearfix">
+    <div class="sidebar-about">
+      <h1 class="site-title">Network Tips</h1>
+      <p class="lead">Tips and tutorials about networking classes of ESTG-IPVC with proper syntax highlighted.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+        <a href="/">Home</a>
+      </li>
+
+      
+
+      
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/about/">About</a>
+            </li>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/search/">Search</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    </ul>
+
+    <p>&copy; 2016. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="wrapper">
+      <div class="content container">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Setup a Email server - Linux</h1>
+    <p class="post-meta"><time datetime="2016-01-18T15:26:01+00:00" itemprop="datePublished">Jan 18, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Simple Mail Transfer Protocol (<a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>) is an Internet standard for electronic mail (email) transmission. <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a> by default uses <a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> port 25. The protocol for mail submission is the same, but uses port 587. <a href="http://www.sendmail.com/">Sendmail</a> was one of the first mail transfer agents to implement <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>.</p>
+
+<p>Over time, as BSD Unix became the most popular operating system on the Internet, sendmail became the most common MTA (mail transfer agent). In 1999 <a href="http://www.postfix.org/">Postfix</a> (released in December 1998) starts to take a lot of adoption because its performance, easy configuration and most important the security that was one thing that sendmail struggle in some versions. Some other popular <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a> server programs include <a href="http://www.qmail.org/">qmail</a>, <a href="http://www.exim.org/">Exim</a>, etc.</p>
+
+<h3 id="postfix">Postfix</h3>
+
+<p>Lets get started by installing postfix on a machine:</p>
+
+<p><code class="highlighter-rouge">$ sudo apt-get update</code> <br />
+<code class="highlighter-rouge">$ sudo apt-get install postfix -y</code></p>
+
+<p>On installation process choose “Internet Site” and them type a mail name of your choice.</p>
+
+<p class="center"><img src="/assets/img/postfix-internet-site.png" alt="postfix internet site" /></p>
+
+<p class="center"><img src="/assets/img/postfix-mail-name.png" alt="postfix mail name" /></p>
+
+<p>Now you just need to change somethings on postfix configuration file, follow the next steps:</p>
+
+<p><code class="highlighter-rouge">$ cd /etc/postfix</code> <br />
+<code class="highlighter-rouge">$ sudo nano main.cf</code></p>
+
+<p>Go to the end of file and make the necessary changes to look like the next code:</p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td><td class="code"><pre><span class="nv">smtpd_relay_restrictions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">permit_mynetworks</span><span class="w"> </span><span class="nv">permit_sasl_authenticated</span><span class="w"> </span><span class="nv">defer_unauth_destination</span><span class="w">
+</span><span class="nv">myhostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ubuntu</span><span class="w">   </span><span class="c1"># your machine hostname</span><span class="w">
+</span><span class="nv">alias_maps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hash</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">aliases</span><span class="w">
+</span><span class="nv">alias_database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hash</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">aliases</span><span class="w">
+</span><span class="nv">myorigin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">mailname</span><span class="w">
+</span><span class="nv">mydestination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">linux</span><span class="p">.</span><span class="nv">dr</span><span class="p">.</span><span class="nv">pt</span><span class="p">,</span><span class="w"> </span><span class="nv">localhost</span><span class="p">.</span><span class="nv">localdomain</span><span class="p">,</span><span class="w"> </span><span class="nv">localhost</span><span class="w">
+</span><span class="nv">relayhost</span><span class="w"> </span><span class="o">=</span><span class="w">
+</span><span class="nv">mynetworks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">127.0</span><span class="p">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">8</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">24</span><span class="w">    </span><span class="c1"># your network</span><span class="w">
+</span><span class="nv">mailbox_size_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nv">recipient_delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span><span class="nv">inet_interfaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">all</span><span class="w">
+</span><span class="nv">inet_protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ipv4</span><span class="w">     </span><span class="c1"># just use ipv4 protocol</span><span class="w">
+
+</span><span class="nv">home_mailbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Maildir</span><span class="o">/</span><span class="w">   </span><span class="c1"># define the root of mailbox</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Just save the file (<code class="highlighter-rouge">CTRL+X</code>,<code class="highlighter-rouge">Y</code>,<code class="highlighter-rouge">Return</code>) and restart postfix with this command: <code class="highlighter-rouge">$ sudo service postfix restart</code>.</p>
+
+<h3 id="dovecot">Dovecot</h3>
+
+<p>At this point you have postfix configured and running. Now lets add <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol">IMAP</a> and <a href="https://en.wikipedia.org/wiki/Post_Office_Protocol">POP3</a> protocols to our mail server. <a href="http://www.dovecot.org/">Dovecot</a> is an open-source <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol">IMAP</a> and <a href="https://en.wikipedia.org/wiki/Post_Office_Protocol">POP3</a> server for Linux/UNIX-like systems released in July 2002.</p>
+
+<p><a href="http://www.dovecot.org/">Dovecot</a> developers primarily aim to produce a lightweight, fast and easy-to-set-up open-source mail server. According to <a href="http://www.openemailsurvey.org/">Openemailsurvey</a> <a href="http://www.dovecot.org/">Dovecot</a> has an installed base of over 2.9 million email servers all over the world and a global market share of 57% of all <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol">IMAP</a> servers. Next steps are install dovecot-imap, dovecot-pop3 and configure them.</p>
+
+<p><code class="highlighter-rouge">$ sudo apt-get install dovecot-imapd dovecot-pop3d -y</code></p>
+
+<p>When it prompts to if you want to create a self-signed SSL certificate, choose yes and on next screen type the mail name that you choose a few steps before.</p>
+
+<p><code class="highlighter-rouge">$ cd /etc/dovecot</code> <br />
+<code class="highlighter-rouge">$ sudo nano dovecot.conf</code></p>
+
+<p>Make this changes:</p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="c1"># Add this lines</span><span class="w">
+</span><span class="nv">protocols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">imap</span><span class="w"> </span><span class="nv">pop3</span><span class="w">
+</span><span class="nv">listen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="w">
+
+</span><span class="c1"># Uncomment this line</span><span class="w">
+</span><span class="nv">login_greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Dovecot</span><span class="w"> </span><span class="nv">ready</span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">$ cd conf.d</code> <br />
+<code class="highlighter-rouge">$ sudo nano 10-auth.conf</code></p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="c1"># Uncomment this line</span><span class="w">
+</span><span class="nv">disable_plaintext_auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">yes</span><span class="w">
+
+</span><span class="c1"># Add login on this line</span><span class="w">
+</span><span class="nv">auth_mechanisms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">plain</span><span class="w"> </span><span class="nv">login</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">$ sudo nano 10-mail.conf</code></p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="c1"># Change this line</span><span class="w">
+</span><span class="nv">mail_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">maildir</span><span class="p">:</span><span class="err">~</span><span class="o">/</span><span class="nv">Maildir</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">$ sudo nano 10-master.conf</code></p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></td><td class="code"><pre><span class="nv">service</span><span class="w"> </span><span class="nv">imap</span><span class="o">-</span><span class="nv">login</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nv">inet_listener</span><span class="w"> </span><span class="nv">imap</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">143</span><span class="w">    </span><span class="c1"># Uncomment this line</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="nv">inet_listener</span><span class="w"> </span><span class="nv">imaps</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1">#port = 993</span><span class="w">
+    </span><span class="c1">#ssl = yes</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="nv">service</span><span class="w"> </span><span class="nv">pop3</span><span class="o">-</span><span class="nv">login</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nv">inet_listener</span><span class="w"> </span><span class="nv">pop3</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">110</span><span class="w">    </span><span class="c1"># Uncomment this line</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="nv">inet_listener</span><span class="w"> </span><span class="nv">pop3s</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1">#port = 995</span><span class="w">
+    </span><span class="c1">#ssl = yes</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1"># Make the necessary changes to the next lines</span><span class="w">
+</span><span class="nv">unix_listener</span><span class="w"> </span><span class="nv">auth</span><span class="o">-</span><span class="nv">userdb</span><span class="w"> </span><span class="p">{</span><span class="w">
+	</span><span class="nv">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0600</span><span class="w">
+	</span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">postfix</span><span class="w">
+	</span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">postfix</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>With all this changes saved, you just need to restart dovecot with this command: <code class="highlighter-rouge">$ sudo service dovecot restart</code>. By executing the command <code class="highlighter-rouge">$ netstat -tnl</code> you can see all machine ports that are listening:</p>
+
+<p class="center"><img src="/assets/img/dovecot-netstat.png" alt="dovecot netstat" /></p>
+
+<p class="center"><img src="/assets/img/dovecot-telnet.png" alt="dovecot telnet" /></p>
+
+<p>Now lets test this mail server with a email client. There are a lot of programs available on the internet but the most popular for linux are <a href="https://www.mozilla.org/en-US/thunderbird/">Thunderbird</a>, <a href="https://wiki.gnome.org/Apps/Evolution/">Evolution</a>, <a href="https://wiki.gnome.org/Apps/Geary/">Geary</a> and <a href="http://sylpheed.sraoss.jp/en/">Sylpheed</a>.</p>
+
+<p>I choose Thunderbird because when you’re dealing with hundreds or thousands of emails every day, speed is a primary concern and this email client delivers. So open Thunderbird and configure your email account:</p>
+
+<blockquote>
+  <p>Note that server hostname is relative to the machine that is running the mail server. So if you are setting up Thunderbird on the mail server machine, you can use 127.0.0.1. If not you need to input the IP of the mail server machine.</p>
+</blockquote>
+
+<p class="center"><img src="/assets/img/thunderbird-config.png" alt="thunderbird config" /></p>
+
+<p class="center"><img src="/assets/img/thunderbird-config-exception.png" alt="thunderbird config" /></p>
+
+<h3 id="squirrelmail">SquirrelMail</h3>
+
+<p><a href="http://squirrelmail.org/">SquirrelMail</a> is a standards-based webmail package written in <a href="https://www.php.net/">PHP</a>. It includes built-in pure <a href="https://www.php.net/">PHP</a> support for the <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol">IMAP</a> and <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a> protocols, and all pages render in pure HTML 4.0 (with no <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> required) for maximum compatibility across browsers.</p>
+
+<p>It has very few requirements and is very easy to configure and install. Next step is to take our mail server to “next level” installing SquirrelMail test on browser:</p>
+
+<p><code class="highlighter-rouge">$ sudo apt-get install squirrelmail</code> <br />
+<code class="highlighter-rouge">$ sudo cp /etc/squirrelmail/apache.conf /etc/apache2/sites-available/squirrelmail.conf</code> <br />
+<code class="highlighter-rouge">$ sudo nano /etc/apache2/sites-available/squirrelmail.conf</code></p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="c1"># Uncomment the next lines</span><span class="w">
+</span><span class="o">&lt;</span><span class="nv">VirtualHost</span><span class="w"> </span><span class="o">*</span><span class="p">:</span><span class="mi">80</span><span class="o">&gt;</span><span class="w">   </span><span class="c1"># change 1.2.3.4 to *:80</span><span class="w">
+  </span><span class="nv">DocumentRoot</span><span class="w"> </span><span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">squirrelmail</span><span class="w">
+  </span><span class="nv">ServerName</span><span class="w"> </span><span class="nv">mail</span><span class="p">.</span><span class="nv">linux</span><span class="p">.</span><span class="nv">dr</span><span class="p">.</span><span class="nv">pt</span><span class="w">
+</span><span class="o">&lt;/</span><span class="nv">VirtualHost</span><span class="o">&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">$ sudo a2ensite squirrelmail</code> <br />
+<code class="highlighter-rouge">$ sudo service apache2 restart</code></p>
+
+<p>As we don’t have a DNS server on the system yet, just add the following line to your hosts file:</p>
+
+<p><code class="highlighter-rouge">$ sudo nano /etc/hosts</code></p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="c1"># Add this line to the file</span><span class="w">
+</span><span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="w">   </span><span class="nv">mail</span><span class="p">.</span><span class="nv">linux</span><span class="p">.</span><span class="nv">dr</span><span class="p">.</span><span class="nv">pt</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now you are good to go test SquirrelMail on a web browser and type this url: <code class="highlighter-rouge">mail.linux.dr.pt</code>.</p>
+
+<p class="center"><img src="/assets/img/squirrelmail-test.png" alt="squirrelmail test" /></p>
+
+<p>One more step to make SquirrelMail page show our mail server name:</p>
+
+<p><code class="highlighter-rouge">$ sudo squirrelmail-configure</code></p>
+
+<p class="center"><img src="/assets/img/squirrelmail-organization-preferences.png" alt="squirrelmail organization" /></p>
+
+<p class="center"><img src="/assets/img/squirrelmail-server-settings.png" alt="squirrelmail server" /></p>
+
+<p class="center"><img src="/assets/img/squirrelmail-test-edited.png" alt="squirrelmail server" /></p>
+
+  </div>
+
+  <hr>
+<div class="social-content">
+  <h3 class="social-title">Share this:</h3>
+  <div class="social-wrapper">
+    <a class="facebook" target="_blank" href="http://www.facebook.com/share.php?u=https://networktips.github.io/articles/mail-server-linux&title=Setup a Email server - Linux"><i class="ion ion-social-facebook"></i>Share</a>
+    <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Setup a Email server - Linux: https://networktips.github.io/articles/mail-server-linux"><i class="ion ion-social-twitter"></i>Tweet</a>
+    <a class="googleplus" target="_blank" href="https://plus.google.com/share?url=https://networktips.github.io/articles/mail-server-linux"><i class="ion ion-social-googleplus"></i>Share</a>
+  </div>
+</div>
+<hr>
+
+
+  <div class="post-navigation">
+    
+      <a class="prev" href="/articles/ftp-server-linux/">&laquo; Setup a FTP server - Linux</a>
+    
+    
+      <a class="next" href="/articles/dns-server-linux/">Setup a DNS server - Linux &raquo;</a>
+    
+  </div>
+
+  <div class="comments-content">
+	<div class="comments-wrapper">
+		<div id="disqus_thread"></div>
+		<script>
+			var disqus_config = function () {
+				this.page.url = "https://networktips.github.io/articles/mail-server-linux";
+				this.page.identifier = "/articles/mail-server-linux";
+			};
+
+			(function() { // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+
+				s.src = '//ruisaraiva19.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+	</div>
+</div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js" defer></script>
+    <script type="text/javascript" src="/assets/js/main.min.js" defer></script>
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-78120059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+
+</html>

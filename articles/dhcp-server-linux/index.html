@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script type="text/javascript">
+    var host = "networktips.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:")) {
+      window.location.protocol = "https";
+    }
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Setup a DHCP server - Linux ◦ Network Tips</title>
+  <meta name="description" content="The Dynamic Host Configuration Protocol (DHCP) is a standardized network protocol used on Internet Protocol (IP) networks for dynamically distributing networ...">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="https://networktips.github.io/articles/dhcp-server-linux/">
+  <link rel="alternate" type="application/rss+xml" title="Network Tips" href="https://networktips.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky clearfix">
+    <div class="sidebar-about">
+      <h1 class="site-title">Network Tips</h1>
+      <p class="lead">Tips and tutorials about networking classes of ESTG-IPVC with proper syntax highlighted.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+        <a href="/">Home</a>
+      </li>
+
+      
+
+      
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/about/">About</a>
+            </li>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+            <li class="sidebar-nav-item">
+              <a href="/search/">Search</a>
+            </li>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    </ul>
+
+    <p>&copy; 2016. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="wrapper">
+      <div class="content container">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Setup a DHCP server - Linux</h1>
+    <p class="post-meta"><time datetime="2016-01-21T21:46:01+00:00" itemprop="datePublished">Jan 21, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>The <a href="//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">Dynamic Host Configuration Protocol</a> (DHCP) is a standardized network protocol used on <a href="//en.wikipedia.org/wiki/Internet_Protocol">Internet Protocol</a> (IP) networks for dynamically distributing network configuration parameters, such as <a href="//en.wikipedia.org/wiki/IP_address">IP addresses</a> for interfaces and services. With <a href="//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a>, computers request <a href="//en.wikipedia.org/wiki/IP_address">IP addresses</a> and networking parameters automatically from a <a href="//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> server, reducing the need for a network administrator or a user to configure these settings manually.</p>
+
+<h3 id="isc-dhcp">ISC DHCP</h3>
+
+<p>All IP devices need addresses, and <a href="//www.isc.org/downloads/dhcp/">ISC DHCP</a> is the easiest and most efficient way to provide them. <a href="//www.isc.org/downloads/dhcp/">ISC DHCP</a> is open source software that implements the <a href="//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">Dynamic Host Configuration Protocol</a> for connection to an <a href="//en.wikipedia.org/wiki/Internet_Protocol">IP</a> network. It is production-grade software that offers a complete solution for implementing <a href="//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> servers, relay agents, and clients from small local networks to large enterprises. <a href="//www.isc.org/downloads/dhcp/">ISC DHCP</a> solution supports both <a href="//en.wikipedia.org/wiki/IPv4">IPv4</a> and <a href="//en.wikipedia.org/wiki/IPv6">IPv6</a>, and is suitable for use in high-volume and high-reliability applications.</p>
+
+<p>Lets start installing ISC DHCP on our linux machine:</p>
+
+<p><code class="highlighter-rouge">$ sudo apt-get install isc-dhcp-server -y</code> <br />
+<code class="highlighter-rouge">$ cd /etc/dhcp</code> <br />
+<code class="highlighter-rouge">$ sudo nano dhcpd.conf</code></p>
+
+<p>Copy the code below and make changes to your needs and network:</p>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="c1"># Change this line</span><span class="w">
+</span><span class="nv">option</span><span class="w"> </span><span class="nv">domain</span><span class="o">-</span><span class="na">name</span><span class="w"> </span><span class="s2">"linux.dr.pt"</span><span class="err">;</span><span class="w">
+</span><span class="nv">option</span><span class="w"> </span><span class="nv">domain</span><span class="o">-</span><span class="na">name</span><span class="o">-</span><span class="nv">servers</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.101</span><span class="err">;</span><span class="w">
+
+</span><span class="c1"># Add this to the end of file</span><span class="w">
+</span><span class="nv">subnet</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.0</span><span class="w"> </span><span class="nv">netmask</span><span class="w"> </span><span class="mf">255.255</span><span class="p">.</span><span class="mf">255.0</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nv">range</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.150</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.160</span><span class="err">;</span><span class="w">
+  </span><span class="nv">option</span><span class="w"> </span><span class="nv">routers</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.254</span><span class="err">;</span><span class="w">
+  </span><span class="nv">option</span><span class="w"> </span><span class="nv">broadcast</span><span class="o">-</span><span class="nv">address</span><span class="w"> </span><span class="mf">10.0</span><span class="p">.</span><span class="mf">0.255</span><span class="err">;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Then just start ISC DHCP with this command: <code class="highlighter-rouge">$ sudo service isc-dhcp-server start</code>. It could take a while until the hosts do a dhcp renew but in the end should look something like the image below:</p>
+
+<p class="center"><img src="/assets/img/dhcp-test-linux.png" alt="dhcp test" />
+<em><strong>Figure 1:</strong> New DHCP information.</em></p>
+
+  </div>
+
+  <hr>
+<div class="social-content">
+  <h3 class="social-title">Share this:</h3>
+  <div class="social-wrapper">
+    <a class="facebook" target="_blank" href="http://www.facebook.com/share.php?u=https://networktips.github.io/articles/dhcp-server-linux&title=Setup a DHCP server - Linux"><i class="ion ion-social-facebook"></i>Share</a>
+    <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Setup a DHCP server - Linux: https://networktips.github.io/articles/dhcp-server-linux"><i class="ion ion-social-twitter"></i>Tweet</a>
+    <a class="googleplus" target="_blank" href="https://plus.google.com/share?url=https://networktips.github.io/articles/dhcp-server-linux"><i class="ion ion-social-googleplus"></i>Share</a>
+  </div>
+</div>
+<hr>
+
+
+  <div class="post-navigation">
+    
+      <a class="prev" href="/articles/sockets-linux/">&laquo; TCP/UDP Sockets - Linux</a>
+    
+    
+  </div>
+
+  <div class="comments-content">
+	<div class="comments-wrapper">
+		<div id="disqus_thread"></div>
+		<script>
+			var disqus_config = function () {
+				this.page.url = "https://networktips.github.io/articles/dhcp-server-linux";
+				this.page.identifier = "/articles/dhcp-server-linux";
+			};
+
+			(function() { // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+
+				s.src = '//ruisaraiva19.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+	</div>
+</div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js" defer></script>
+    <script type="text/javascript" src="/assets/js/main.min.js" defer></script>
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-78120059-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+
+</html>
