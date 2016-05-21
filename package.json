@@ -9,7 +9,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/networktips/networktips.github.io"
+    "url": "git@github.com:networktips/networktips.github.io.git"
   },
   "homepage": "https://networktips.github.io",
   "devDependencies": {
