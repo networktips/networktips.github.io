@@ -2,5 +2,6 @@ _site/
 assets/
 .sass-cache/
 .jekyll-metadata
+.publish
 Gemfile.lock
 node_modules
