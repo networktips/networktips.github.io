@@ -9,7 +9,7 @@ tags: socket udp tcp
 
 A [network socket](https://en.wikipedia.org/wiki/Network_socket) is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the [Internet Protocol](https://en.wikipedia.org/wiki/Internet_Protocol), therefore most network sockets are Internet sockets. A socket address is the combination of an [IP](https://en.wikipedia.org/wiki/Internet_Protocol) address and a [port](https://en.wikipedia.org/wiki/Port_(computer_networking)) number. Based on this address, internet sockets deliver incoming data [packets](https://en.wikipedia.org/wiki/Network_packet) to the appropriate application [process](https://en.wikipedia.org/wiki/Process_(computing)) or [thread](https://en.wikipedia.org/wiki/Thread_(computing)).
 
-If you want generic sockets written in Python, Perl, C and Java [click here](//www.prasannatech.net/2008/07/socket-programming-tutorial.html).
+If you want generic sockets written in Python, Perl, C and Java [click here](http://www.prasannatech.net/2008/07/socket-programming-tutorial.html).
 
 ### UDP
 
@@ -24,7 +24,7 @@ As shown in the Figure 1, the steps of establishing a UDP socket communication o
 - Send and receive data by means of the recvfrom() and sendto() functions.
 
 {: .center}
-![tcp server](//www.cs.dartmouth.edu/~campbell/cs60/UDPsockets.jpg)
+![tcp server](http://www.cs.dartmouth.edu/~campbell/cs60/UDPsockets.jpg)
 ***Figure 1:** UDP client-server.*
 
 ### TCP
@@ -37,7 +37,7 @@ As shown in the Figure 1, the steps of establishing a UDP socket communication o
 The sequence of function calls for the client and a server participating in a TCP connection is presented in Figure 2.
 
 {: .center}
-![tcp server](//www.cs.dartmouth.edu/~campbell/cs60/TCPsockets.jpg)
+![tcp server](http://www.cs.dartmouth.edu/~campbell/cs60/TCPsockets.jpg)
 ***Figure 2:** TCP client-server.*
 
 As shown in the figure, the steps for establishing a TCP socket on the client side are the following:
