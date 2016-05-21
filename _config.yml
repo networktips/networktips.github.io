@@ -1,0 +1,26 @@
+# Site settings
+title: Network Tips
+email: ruisaraiva@ipvc.pt
+description: > # this means to ignore newlines until "baseurl:"
+  Tips and tutorials about networking classes of ESTG-IPVC with proper syntax highlighted.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://networktips.github.io" # the base hostname & protocol for your site
+
+permalink: /articles/:title/
+
+# Build settings
+markdown: kramdown
+exclude: ["node_modules", "gulpfile.js", "package.json", "Gemfile", "Gemfile.lock"]
+
+gems:
+  - jekyll-paginate
+
+# Pagination settings
+paginate: 4
+paginate_path: "/page/:num/"
+
+category_dir: "categories"
+category_layout: "_layouts/category_index.html"
+
+tag_dir: "tags"
+tag_layout: "_layouts/tag_index.html"

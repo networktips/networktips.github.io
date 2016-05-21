@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "Ionicons";
+  src: url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1");
+  src: url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.woff?v=2.0.1") format("woff"), url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ion-social-facebook:before,
+.ion-social-twitter:before,
+.ion-android-search:before,
+.ion-link:before,
+.ion-social-googleplus:before {
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  margin-right: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ion-social-googleplus:before { content: "\f235" }
+
+.ion-social-facebook:before { content: "\f231" }
+
+.ion-social-twitter:before { content: "\f243" }
+
+.ion-android-search:before { content: "\f2f5" }
+
+.ion-link:before {
+  content: "\f1fe";
+  margin-left: 5px;
+  transform: rotate(45deg);
+}

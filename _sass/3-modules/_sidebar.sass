@@ -1,0 +1,84 @@
+/*
+ * Sidebar
+ *
+ * Flexible banner for housing site name, intro, and "footer" content. Starts
+ * out above content in mobile and later moves to the side with wider viewports.
+ */
+
+.sidebar
+  text-align: center
+  padding: 2rem 1rem
+  color: rgba(255,255,255,.5)
+  background-color: #202020
+
+  &::before
+    content: ' '
+    display: block
+    +position(absolute, 0 0 0 0)
+    background:
+      image: url("/assets/img/bg_network.svg")
+      size: cover
+      repeat: no-repeat
+      position: center
+    opacity: 0.1
+
+@media (min-width: 48rem)
+  .sidebar
+    position: fixed
+    top: 0
+    left: 0
+    bottom: 0
+    width: 18rem
+    text-align: left
+
+
+/* Sidebar links */
+.sidebar a
+  color: #fff
+
+
+/* About section */
+.sidebar-about h1
+  color: #fff
+  margin-top: 0
+  font-family: "Abril Fatface", serif
+  font-size: 3.25rem
+
+
+/* Sidebar nav */
+.sidebar-nav
+  padding-left: 0
+  list-style: none
+
+.sidebar-nav-item
+  display: block
+
+a.sidebar-nav-item:hover,
+a.sidebar-nav-item:focus
+  text-decoration: underline
+
+.sidebar-nav-item.active
+  font-weight: bold
+
+
+/* Sticky sidebar
+ *
+ * Add the `sidebar-sticky` class to the sidebar's container to affix it the
+ * contents to the bottom of the sidebar in tablets and up.
+ */
+
+@media (min-width: 48rem)
+  .sidebar-sticky
+    position: absolute
+    right:  1rem
+    bottom: 1rem
+    left:   1rem
+
+/* Site Logo */
+.site-title
+  background: url("/assets/img/logo.svg")
+  background-repeat: no-repeat
+  color: transparent !important
+  background-position: center
+  background-size: contain
+  line-height: 1.5

@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+// Our variables
+$base-font-family: "Open Sans", Helvetica, sans-serif;
+$base-font-size:   16px;
+$base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+$spacing-unit:     30px;
+
+$text-color:       #515151;
+$title-color:      #303030;
+$text-muted:       #9a9a9a;
+$highlight:        #bf616a;
+$code-bg:          #f9f9f9;
+$background-color: #f1f1f1;
+$brand-color:      #31be5b;
+
+$border-color:     #e2e2e2;
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 30%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// v2 variables
+$dark: #272727;
+$light: #9A9A9A;
+$white: #DDDDDD;
+$bg_color: #E1E1E1;
+$brand: #2CC55E;
+$google: #CE3631;
+$twitter: #469AE9;
+$facebook: #2D4485;
+
+// Width of the content area
+$content-width:    1000px;
+
+$on-iphone:        480px;
+$on-mobile:        768px;
+$on-palm:          960px;
+$on-laptop:        1280px;
+
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+		@content;
+  }
+}
