@@ -6,13 +6,13 @@
 </description>
     <link>https://networktips.github.io/</link>
     <atom:link href="https://networktips.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 May 2016 00:52:14 +0100</pubDate>
-    <lastBuildDate>Sun, 22 May 2016 00:52:14 +0100</lastBuildDate>
+    <pubDate>Sun, 22 May 2016 10:59:55 +0100</pubDate>
+    <lastBuildDate>Sun, 22 May 2016 10:59:55 +0100</lastBuildDate>
     <generator>Jekyll v3.0.5</generator>
     
       <item>
         <title>Setup a DHCP server - Linux</title>
-        <description>&lt;p&gt;The &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;Dynamic Host Configuration Protocol&lt;/a&gt; (DHCP) is a standardized network protocol used on &lt;a href=&quot;//en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt; (IP) networks for dynamically distributing network configuration parameters, such as &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; for interfaces and services. With &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;DHCP&lt;/a&gt;, computers request &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; and networking parameters...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/dhcp-server-thumbnail.jpg"></div></description>
+        <description>The Dynamic Host Configuration Protocol (DHCP) is a standardized network protocol used on Internet Protocol (IP) networks for dynamically distributing network configuration parameters, such as IP addresses for interfaces and services. With DHCP, computers request IP addresses and networking parameters automatically from a DHCP server,...<img src="https://networktips.github.io/assets/img/dhcp-server-thumbnail.jpg"/></description>
         <pubDate>Thu, 21 Jan 2016 21:46:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/dhcp-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/dhcp-server-linux/</guid>
@@ -32,7 +32,7 @@
     
       <item>
         <title>TCP/UDP Sockets - Linux</title>
-        <description>&lt;p&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_socket&quot;&gt;network socket&lt;/a&gt; is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt;, therefore most network sockets are Internet sockets. A socket address is the combination of an &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;IP&lt;/a&gt; address...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/tcp-udp-socket-thumbnail.jpg"></div></description>
+        <description>A network socket is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the Internet Protocol, therefore most network sockets are Internet sockets. A socket address is the combination of an IP address and a port...<img src="https://networktips.github.io/assets/img/tcp-udp-socket-thumbnail.jpg"/></description>
         <pubDate>Wed, 20 Jan 2016 16:16:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/sockets-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/sockets-linux/</guid>
@@ -50,7 +50,7 @@
     
       <item>
         <title>Setup a DNS server - Linux</title>
-        <description>&lt;p&gt;The &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;Domain Name System&lt;/a&gt;, or &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;DNS&lt;/a&gt;, is one of the Internet’s fundamental building blocks. It is the global, hierarchical, and distributed host information database that’s responsible for translating names into addresses and vice versa, routing mail to its proper destination, and many other...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/dns-server-thumbnail.jpg"></div></description>
+        <description>The Domain Name System, or DNS, is one of the Internet’s fundamental building blocks. It is the global, hierarchical, and distributed host information database that’s responsible for translating names into addresses and vice versa, routing mail to its proper destination, and many other services. If...<img src="https://networktips.github.io/assets/img/dns-server-thumbnail.jpg"/></description>
         <pubDate>Tue, 19 Jan 2016 22:46:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/dns-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/dns-server-linux/</guid>
@@ -68,7 +68,7 @@
     
       <item>
         <title>Setup a Email server - Linux</title>
-        <description>&lt;p&gt;Simple Mail Transfer Protocol (&lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt;) is an Internet standard for electronic mail (email) transmission. &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; by default uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; port 25. The protocol for mail submission is the same, but uses port 587. &lt;a href=&quot;http://www.sendmail.com/&quot;&gt;Sendmail&lt;/a&gt; was one of the first mail transfer...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/squirrelmail-test.png"></div></description>
+        <description>Simple Mail Transfer Protocol (SMTP) is an Internet standard for electronic mail (email) transmission. SMTP by default uses TCP port 25. The protocol for mail submission is the same, but uses port 587. Sendmail was one of the first mail transfer agents to implement SMTP....<img src="https://networktips.github.io/assets/img/squirrelmail-test.png"/></description>
         <pubDate>Mon, 18 Jan 2016 15:26:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/mail-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/mail-server-linux/</guid>
@@ -88,7 +88,7 @@
     
       <item>
         <title>Setup a FTP server - Linux</title>
-        <description>&lt;p&gt;The File Transfer Protocol (&lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt;) is a standard network protocol used to transfer computer files between a client and server on a computer network. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; is built on a client-server model architecture and uses separate control and data connections between the client and...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/"></div></description>
+        <description>The File Transfer Protocol (FTP) is a standard network protocol used to transfer computer files between a client and server on a computer network. FTP is built on a client-server model architecture and uses separate control and data connections between the client and the server....<img src="https://networktips.github.io/assets/img/"/></description>
         <pubDate>Sun, 17 Jan 2016 22:36:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/ftp-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/ftp-server-linux/</guid>
@@ -104,7 +104,7 @@
     
       <item>
         <title>Setup a Apache server - Linux</title>
-        <description>&lt;p&gt;A web server processes requests via &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt;, the basic network protocol used to distribute information on the &lt;a href=&quot;https://en.wikipedia.org/wiki/World_Wide_Web&quot;&gt;World Wide Web&lt;/a&gt;. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/"></div></description>
+        <description>A web server processes requests via HTTP, the basic network protocol used to distribute information on the World Wide Web. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server takes place...<img src="https://networktips.github.io/assets/img/"/></description>
         <pubDate>Sat, 16 Jan 2016 18:15:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/web-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/web-server-linux/</guid>
@@ -120,7 +120,7 @@
     
       <item>
         <title>Protocol Stack</title>
-        <description>&lt;p&gt;The protocol stack is an implementation of a computer networking protocol suite. The suite is the definition of the protocols, and the stack is the software implementation of them. In practical, protocol stacks are divided into three major sections: media, transport, and applications. Lets see...<div style="text-align: center;"><img src="https://networktips.github.io/assets/img/"></div></description>
+        <description>The protocol stack is an implementation of a computer networking protocol suite. The suite is the definition of the protocols, and the stack is the software implementation of them. In practical, protocol stacks are divided into three major sections: media, transport, and applications. Lets see...<img src="https://networktips.github.io/assets/img/"/></description>
         <pubDate>Fri, 15 Jan 2016 21:10:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/protocol-stack/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/protocol-stack/</guid>
