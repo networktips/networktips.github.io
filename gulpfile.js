@@ -10,6 +10,7 @@ var gulp         = require('gulp'),
     sourcemaps   = require('gulp-sourcemaps'),
     cp           = require('child_process'),
     browserSync  = require('browser-sync'),
+    runSequence  = require('run-sequence'),
     argv         = require('yargs').argv,
     del          = require('del'),
     bourbon      = require('node-bourbon').includePaths,
@@ -21,9 +22,12 @@ var gulp         = require('gulp'),
 /**
  * General Build Site
  */
- gulp.task('build', ['clean', 'sass', 'scripts', 'imagemin', 'jekyll-build'], function() {
-   return;
- });
+gulp.task('build', function(done) {
+  runSequence('clean', ['sass', 'scripts', 'imagemin'], 'jekyll-build', function() {
+    console.log("Build Successful!");
+    done();
+  });
+});
 
 /**
  * Build the Jekyll Site
@@ -73,12 +77,15 @@ gulp.task("deploy", ["build"], function () {
 /**
  * Wait for build, then launch the Server
  */
-gulp.task('browser-sync', ['jekyll-build', 'sass', 'scripts', 'imagemin'], function() {
-  browserSync.init({
-    notify: false,
-    server: {
-        baseDir: "./_site"
-    }
+gulp.task('browser-sync', function(done) {
+  runSequence(['sass', 'scripts', 'imagemin'], 'jekyll-build', function() {
+    browserSync.init({
+      notify: false,
+      server: {
+          baseDir: "./_site"
+      }
+    });
+    done();
   });
 });
 
