@@ -167,4 +167,8 @@ gulp.task('watch', function () {
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync & watch files.
  */
-gulp.task('default', ['clean', 'browser-sync', 'watch']);
+gulp.task('default', function (done) {
+  runSequence('clean', 'browser-sync', 'watch', function () {
+    done();
+  });
+});
