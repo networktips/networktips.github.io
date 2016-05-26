@@ -64,4 +64,16 @@ $(document).ready(function () {
 
   anchorTagLinks();
 
+  $(window).resize(function () {
+    if ( $(window).width() <= 768) {
+      $('.mobile-toogle').removeClass('open');
+      $('.mobile-nav').removeClass('open');
+    }
+  });
+
+  $('.mobile-toogle').on('click', function () {
+    $(this).toggleClass('open');
+    $('.mobile-nav').toggleClass('open');
+  });
+
 });
