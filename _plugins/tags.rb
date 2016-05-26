@@ -17,7 +17,8 @@ module Jekyll
       self.read_yaml(@base, tag_layout)
 
       self.data.merge!(
-        'paginator' => Paginate::Pager.new(site, num_page, site.tags[tag])
+        'paginator' => Paginate::Pager.new(site, num_page, site.tags[tag]),
+        'title' => tag
       )
     end
   end

@@ -17,7 +17,8 @@ module Jekyll
       self.read_yaml(@base, category_layout)
 
       self.data.merge!(
-        'paginator' => Paginate::Pager.new(site, num_page, site.categories[category])
+        'paginator' => Paginate::Pager.new(site, num_page, site.categories[category]),
+        'title' => category
       )
     end
   end
@@ -36,5 +37,5 @@ module Jekyll
       end
     end
   end
-  
+
 end
