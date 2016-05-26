@@ -23,6 +23,7 @@ var gulp         = require('gulp'),
  * General Build Site
  */
 gulp.task('build', function(done) {
+  environments.current(production);
   runSequence('clean', ['sass', 'scripts', 'imagemin'], 'jekyll-build', function() {
     console.log("Build Successful!");
     done();
