@@ -5,12 +5,18 @@
 
   <body>
 
-    {% include sidebar.html %}
+    <div class="flex-container">
+      {% include sidebar.html %}
 
-    <div class="wrapper">
-      <div class="content container">
-        {{ content }}
+      {% include mobile-nav.html %}
+
+      <div class="wrapper">
+        <div class="content container">
+          {{ content }}
+        </div>
       </div>
+
+      {% include footer.html %}
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js" defer></script>
