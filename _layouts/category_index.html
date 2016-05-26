@@ -6,35 +6,50 @@ layout: default
 {% assign paginator = page.paginator %}
 {% endif %}
 
-<ul class="posts">
+<div class="posts">
 {% for post in paginator.posts %}
-  <div>{{ post.date | date: '%B %d, %Y' }}</div>
-  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-{% endfor %}
-</ul>
+  <div class="post">
+    <h1 class="post-title">
+      <a href="{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h1>
 
-{% if paginator.total_pages > 1 %}
-  <div class="pagination--links">
-    <div class="pagination--square-links">
-    {% for pages in (1..paginator.total_pages) %}
-      {% if pages == 1 %}
-        <a href="/categories/{{ page.title }}/" class="square-link">{{forloop.index}}</a>
-      {% else %}
-        <a href="/categories/{{ page.title }}/page/{{forloop.index}}/" class="square-link">{{forloop.index}}</a>
-      {% endif %}
-    {% endfor %}
+    <div class="post-meta">
+      <div class="left">
+        <span class="post-date">{{ post.date | date_to_string }} ◦</span>
+        <span class="post-categories">
+          {% for category in post.categories %}
+          <a class="post-category" href="{{ site.baseurl }}/categories/{{ category }}">{{category}}</a>
+          {% unless forloop.last%}/{% endunless %}
+          {% endfor %}
+        </span>
+      </div>
+      <div class="right">
+        <span><a class="post-comments" href="{{ post.url | prepend: site.baseurl }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comment</a></span>
+      </div>
     </div>
 
-    {% if paginator.previous_page %}
-      {% if paginator.previous_page == 1 %}
-        <div class="prev--link"><a href="/categories/{{ page.title }}" class="pagination--previous">Recent</a></div>
-      {% else %}
-        <div class="prev--link"><a href="/categories/{{ page.title }}/page/{{ paginator.previous_page }}" class="pagination--previous">Recent</a></div>
-      {% endif %}
-    {% endif %}
+    <p>{{ post.content | truncatewords: 45 }}</p>
 
-    {% if paginator.next_page %}
-      <div class="next--link"><a href="/categories/{{ page.title }}/page/{{ paginator.next_page }}" class="pagination--next">Older</a></div>
-    {% endif %}
+    <img class="post-image" src="{% if post.thumbnail %}/assets/img/{{ post.thumbnail }}{% else %}http://placehold.it/960x400{% endif %}"/>
   </div>
-{% endif %}
+{% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="/categories/{{ page.title }}/page/{{paginator.next_page}}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+      <a class="pagination-item newer" href="/categories/{{ page.title }}">Newer</a>
+    {% else %}
+      <a class="pagination-item newer" href="/categories/{{ page.title }}/page/{{paginator.previous_page}}">Newer</a>
+    {% endif %}
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
+  {% endif %}
+</div>
