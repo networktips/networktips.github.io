@@ -2,22 +2,22 @@
   display: flex
   margin-bottom: 3rem
 
+
 .search-box
   display: inline-block
   background: transparent
-  height: 50px
+  +size(60% 50px)
   border: 1px solid rgba($text_muted, 0.5)
   padding: 10px 20px
   outline: none
   max-width: 400px
-  width: 60%
+
 
 .search-button
   display: inline-flex
   justify-content: center
   align-items: center
-  height: 50px
-  width: 60px
+  +size(60px 50px)
   background: rgba($text_color, 0.9)
   border: none
   text-decoration: none
@@ -25,6 +25,7 @@
 
   &:hover
     background: $text_color
+
 
 .search-icon
   line-height: 1

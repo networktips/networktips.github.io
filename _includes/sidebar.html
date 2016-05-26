@@ -1,9 +1,7 @@
 <div class="sidebar">
-  <div class="container sidebar-sticky clearfix">
-    <div class="sidebar-about">
-      <h1 class="site-title">{{ site.title }}</h1>
-      <p class="lead">{{ site.description }}</p>
-    </div>
+  <div class="container sidebar-sticky">
+    <a class="site-title" href="/"><h1>NT</h1></a>
+    <p class="lead">{{ site.description }}</p>
 
     <ul class="sidebar-nav">
       <li class="sidebar-nav-item{% if page.title == "Home" %} active{% endif %}">
@@ -27,6 +25,8 @@
       {% endfor %}
     </ul>
 
-    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    <p class="copyright">&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+
+    <button class="mobile-toogle" type="button"></button>
   </div>
 </div>
