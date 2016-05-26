@@ -12,7 +12,8 @@
 .ion-social-twitter:before,
 .ion-android-search:before,
 .ion-link:before,
-.ion-social-googleplus:before {
+.ion-social-googleplus:before,
+.ion-android-menu:before {
   display: inline-block;
   font-family: "Ionicons";
   speak: none;
@@ -40,3 +41,5 @@
   margin-left: 5px;
   transform: rotate(45deg);
 }
+
+.ion-android-menu:before{ content: "\f394" }
