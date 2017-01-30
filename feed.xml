@@ -6,13 +6,52 @@
 </description>
     <link>https://networktips.github.io/</link>
     <atom:link href="https://networktips.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 24 Dec 2016 16:12:37 +0000</pubDate>
-    <lastBuildDate>Sat, 24 Dec 2016 16:12:37 +0000</lastBuildDate>
+    <pubDate>Mon, 30 Jan 2017 18:55:02 +0000</pubDate>
+    <lastBuildDate>Mon, 30 Jan 2017 18:55:02 +0000</lastBuildDate>
     <generator>Jekyll v3.0.5</generator>
     
       <item>
         <title>Setup a DHCP server - Linux</title>
-        <description>&lt;p&gt;The &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;Dynamic Host Configuration Protocol&lt;/a&gt; (DHCP) is a standardized network protocol used on &lt;a href=&quot;//en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt; (IP) networks for dynamically distributing network configuration parameters, such as &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; for interfaces and services. With &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;DHCP&lt;/a&gt;, computers request &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; and networking parameters...&lt;img src="https://networktips.github.io/assets/img/dhcp-server-thumbnail.jpg"/&gt;</description>
+        <description>&lt;p&gt;The &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;Dynamic Host Configuration Protocol&lt;/a&gt; (DHCP) is a standardized network protocol used on &lt;a href=&quot;//en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt; (IP) networks for dynamically distributing network configuration parameters, such as &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; for interfaces and services. With &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;DHCP&lt;/a&gt;, computers request &lt;a href=&quot;//en.wikipedia.org/wiki/IP_address&quot;&gt;IP addresses&lt;/a&gt; and networking parameters automatically from a &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;DHCP&lt;/a&gt; server, reducing the need for a network administrator or a user to configure these settings manually.&lt;/p&gt;
+
+&lt;h3 id=&quot;isc-dhcp&quot;&gt;ISC DHCP&lt;/h3&gt;
+
+&lt;p&gt;All IP devices need addresses, and &lt;a href=&quot;//www.isc.org/downloads/dhcp/&quot;&gt;ISC DHCP&lt;/a&gt; is the easiest and most efficient way to provide them. &lt;a href=&quot;//www.isc.org/downloads/dhcp/&quot;&gt;ISC DHCP&lt;/a&gt; is open source software that implements the &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;Dynamic Host Configuration Protocol&lt;/a&gt; for connection to an &lt;a href=&quot;//en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;IP&lt;/a&gt; network. It is production-grade software that offers a complete solution for implementing &lt;a href=&quot;//en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&quot;&gt;DHCP&lt;/a&gt; servers, relay agents, and clients from small local networks to large enterprises. &lt;a href=&quot;//www.isc.org/downloads/dhcp/&quot;&gt;ISC DHCP&lt;/a&gt; solution supports both &lt;a href=&quot;//en.wikipedia.org/wiki/IPv4&quot;&gt;IPv4&lt;/a&gt; and &lt;a href=&quot;//en.wikipedia.org/wiki/IPv6&quot;&gt;IPv6&lt;/a&gt;, and is suitable for use in high-volume and high-reliability applications.&lt;/p&gt;
+
+&lt;p&gt;Lets start installing ISC DHCP on our linux machine:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install isc-dhcp-server -y&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /etc/dhcp&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano dhcpd.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Copy the code below and make changes to your needs and network:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Change this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;linux.dr.pt&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;servers&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.101&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Add this to the end of file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;subnet&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.150&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.160&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;routers&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.254&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;broadcast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.255&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then just start ISC DHCP with this command: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service isc-dhcp-server start&lt;/code&gt;. It could take a while until the hosts do a dhcp renew but in the end should look something like the image below:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/dhcp-test-linux.png&quot; alt=&quot;dhcp test&quot; /&gt;
+&lt;em&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; New DHCP information.&lt;/em&gt;&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/dhcp-server-thumbnail.jpg"/&gt;</description>
         <pubDate>Thu, 21 Jan 2016 21:46:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/dhcp-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/dhcp-server-linux/</guid>
@@ -32,7 +71,59 @@
     
       <item>
         <title>TCP/UDP Sockets - Linux</title>
-        <description>&lt;p&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_socket&quot;&gt;network socket&lt;/a&gt; is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt;, therefore most network sockets are Internet sockets. A socket address is the combination of an &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;IP&lt;/a&gt; address...&lt;img src="https://networktips.github.io/assets/img/tcp-udp-socket-thumbnail.jpg"/&gt;</description>
+        <description>&lt;p&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_socket&quot;&gt;network socket&lt;/a&gt; is an endpoint of an inter-process communication across a computer network. Today, most communication between computers is based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;Internet Protocol&lt;/a&gt;, therefore most network sockets are Internet sockets. A socket address is the combination of an &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Protocol&quot;&gt;IP&lt;/a&gt; address and a &lt;a href=&quot;https://en.wikipedia.org/wiki/Port_(computer_networking)&quot;&gt;port&lt;/a&gt; number. Based on this address, internet sockets deliver incoming data &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_packet&quot;&gt;packets&lt;/a&gt; to the appropriate application &lt;a href=&quot;https://en.wikipedia.org/wiki/Process_(computing)&quot;&gt;process&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Thread_(computing)&quot;&gt;thread&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want generic sockets written in Python, Perl, C and Java &lt;a href=&quot;http://www.prasannatech.net/2008/07/socket-programming-tutorial.html&quot;&gt;click here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;udp&quot;&gt;UDP&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;UDP&lt;/a&gt; is a simple transport-layer protocol. The application writes a message to a &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;UDP&lt;/a&gt; socket, which is then encapsulated in a &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;UDP&lt;/a&gt; datagram, which is further encapsulated in an IP datagram, which is sent to the destination.
+There is no guarantee that a &lt;a href=&quot;https://en.wikipedia.org/wiki/User_Datagram_Protocol&quot;&gt;UDP&lt;/a&gt; will reach the destination, that the order of the datagrams will be preserved across the network or that datagrams arrive only once.&lt;/p&gt;
+
+&lt;h3 id=&quot;udp-socket-api&quot;&gt;UDP Socket API&lt;/h3&gt;
+
+&lt;p&gt;As shown in the Figure 1, the steps of establishing a UDP socket communication on the client side are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a socket using the socket() function;&lt;/li&gt;
+  &lt;li&gt;Send and receive data by means of the recvfrom() and sendto() functions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;http://www.cs.dartmouth.edu/~campbell/cs60/UDPsockets.jpg&quot; alt=&quot;tcp server&quot; /&gt;
+&lt;em&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; UDP client-server.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tcp&quot;&gt;TCP&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; provides a connection oriented service, since it is based on connections between clients and servers.
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; provides reliability. When a &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; client send data to the server, it requires an acknowledgement in return. If an acknowledgement is not received, &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; automatically retransmit the data and waits for a longer period of time.&lt;/p&gt;
+
+&lt;h3 id=&quot;tcp-socket-api&quot;&gt;TCP Socket API&lt;/h3&gt;
+
+&lt;p&gt;The sequence of function calls for the client and a server participating in a TCP connection is presented in Figure 2.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;http://www.cs.dartmouth.edu/~campbell/cs60/TCPsockets.jpg&quot; alt=&quot;tcp server&quot; /&gt;
+&lt;em&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; TCP client-server.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As shown in the figure, the steps for establishing a TCP socket on the client side are the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a socket using the socket() function;&lt;/li&gt;
+  &lt;li&gt;Connect the socket to the address of the server using the connect() function;&lt;/li&gt;
+  &lt;li&gt;Send and receive data by means of the read() and write() functions.&lt;/li&gt;
+  &lt;li&gt;Close the connection by means of the close() function.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The steps involved in establishing a TCP socket on the server side are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a socket with the socket() function;&lt;/li&gt;
+  &lt;li&gt;Bind the socket to an address using the bind() function;&lt;/li&gt;
+  &lt;li&gt;Listen for connections with the listen() function;&lt;/li&gt;
+  &lt;li&gt;Accept a connection with the accept() function. This call typically blocks until a client connects with the server.&lt;/li&gt;
+  &lt;li&gt;Send and receive data by means of write() and read().&lt;/li&gt;
+  &lt;li&gt;Close the connection by means of the close() function.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src="https://networktips.github.io/assets/img/tcp-udp-socket-thumbnail.jpg"/&gt;</description>
         <pubDate>Wed, 20 Jan 2016 16:16:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/sockets-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/sockets-linux/</guid>
@@ -50,7 +141,129 @@
     
       <item>
         <title>Setup a DNS server - Linux</title>
-        <description>&lt;p&gt;The &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;Domain Name System&lt;/a&gt;, or &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;DNS&lt;/a&gt;, is one of the Internet’s fundamental building blocks. It is the global, hierarchical, and distributed host information database that’s responsible for translating names into addresses and vice versa, routing mail to its proper destination, and many other...&lt;img src="https://networktips.github.io/assets/img/dns-server-thumbnail.jpg"/&gt;</description>
+        <description>&lt;p&gt;The &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;Domain Name System&lt;/a&gt;, or &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;DNS&lt;/a&gt;, is one of the Internet’s fundamental building blocks. It is the global, hierarchical, and distributed host information database that’s responsible for translating names into addresses and vice versa, routing mail to its proper destination, and many other services.&lt;/p&gt;
+
+&lt;p&gt;If you have following the previous articles (Web, FTP and Mail), you probably take notice that when we want to connect to server, there is always a IP (127.0.0.1) in the midle of the process. So in this article we gonna associate all servers into one name (linux.dr.pt). First step is to install a DNS Server on the machine.&lt;/p&gt;
+
+&lt;h3 id=&quot;bind&quot;&gt;BIND&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.bind9.net/&quot;&gt;BIND&lt;/a&gt; (Berkeley Internet Name Domain) is an implementation of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;DNS&lt;/a&gt; protocols and provides an openly redistributable reference implementation of the major components of the Domain Name System. The BIND DNS Server is used on the vast majority of name serving machines on the Internet, providing a robust and stable architecture on top of which an organization’s naming architecture can be built.&lt;/p&gt;
+
+&lt;p&gt;Lets start installing bind and configure it to our needs:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get update&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install bind9&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /etc/bind&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano named.conf.options&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this lines&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;forwarders&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano named.conf.local&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Add this lines&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;zone&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;linux.dr.pt&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/etc/bind/zones/linux.dr.pt.zone&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo mkdir zones&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd zones&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano linux.dr.pt.zone&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Copy the next code and edit to your needs (ip address and domain name).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scheme&quot; data-lang=&quot;scheme&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;; BIND data file for linux.dr.pt&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$TTL&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;h&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;@&lt;/span&gt;       &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;SOA&lt;/span&gt;     &lt;span class=&quot;nv&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;2016012001&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;; YYYYMMDDXX&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;h&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;; Refresh&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;h&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;; Retry&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;w&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;; Expire&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;; Negative Cache TTL&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;; NS Records&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;@&lt;/span&gt;       &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;NS&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;; A Records&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;A&lt;/span&gt;       &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.101&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ns&lt;/span&gt;              &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;A&lt;/span&gt;       &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.101&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mail&lt;/span&gt;            &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;A&lt;/span&gt;       &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.101&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;; CNAME Records&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;www&lt;/span&gt;             &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;CNAME&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ftp&lt;/span&gt;             &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;CNAME&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;; MX Records&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;    &lt;span class=&quot;nv&quot;&gt;IN&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;MX&lt;/span&gt;      &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;      &lt;span class=&quot;nv&quot;&gt;mail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano /etc/resolv.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Change this lines&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;nameserver&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.101&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano /etc/hosts&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Delete this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;127.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service bind9 restart&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ nslookup linux.dr.pt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/nslookup-test.png&quot; alt=&quot;nslookup test&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now when you want to connect to FTP server for example, you just type &lt;code class=&quot;highlighter-rouge&quot;&gt;ftp.linux.dr.pt&lt;/code&gt; on the host text box, username and password and it will connect like with the &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; ip address.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/dns-ftp-test.png&quot; alt=&quot;dovecot telnet&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On Thunderbird you can add a new email account and it will discover the mail server automatically, see the animation below:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/dns-mail-test.gif&quot; alt=&quot;dovecot telnet&quot; /&gt;&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/dns-server-thumbnail.jpg"/&gt;</description>
         <pubDate>Tue, 19 Jan 2016 22:46:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/dns-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/dns-server-linux/</guid>
@@ -68,7 +281,230 @@
     
       <item>
         <title>Setup a Email server - Linux</title>
-        <description>&lt;p&gt;Simple Mail Transfer Protocol (&lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt;) is an Internet standard for electronic mail (email) transmission. &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; by default uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; port 25. The protocol for mail submission is the same, but uses port 587. &lt;a href=&quot;http://www.sendmail.com/&quot;&gt;Sendmail&lt;/a&gt; was one of the first mail transfer...&lt;img src="https://networktips.github.io/assets/img/squirrelmail-test.png"/&gt;</description>
+        <description>&lt;p&gt;Simple Mail Transfer Protocol (&lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt;) is an Internet standard for electronic mail (email) transmission. &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; by default uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; port 25. The protocol for mail submission is the same, but uses port 587. &lt;a href=&quot;http://www.sendmail.com/&quot;&gt;Sendmail&lt;/a&gt; was one of the first mail transfer agents to implement &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Over time, as BSD Unix became the most popular operating system on the Internet, sendmail became the most common MTA (mail transfer agent). In 1999 &lt;a href=&quot;http://www.postfix.org/&quot;&gt;Postfix&lt;/a&gt; (released in December 1998) starts to take a lot of adoption because its performance, easy configuration and most important the security that was one thing that sendmail struggle in some versions. Some other popular &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; server programs include &lt;a href=&quot;http://www.qmail.org/&quot;&gt;qmail&lt;/a&gt;, &lt;a href=&quot;http://www.exim.org/&quot;&gt;Exim&lt;/a&gt;, etc.&lt;/p&gt;
+
+&lt;h3 id=&quot;postfix&quot;&gt;Postfix&lt;/h3&gt;
+
+&lt;p&gt;Lets get started by installing postfix on a machine:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get update&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install postfix -y&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;On installation process choose “Internet Site” and them type a mail name of your choice.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/postfix-internet-site.png&quot; alt=&quot;postfix internet site&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/postfix-mail-name.png&quot; alt=&quot;postfix mail name&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you just need to change somethings on postfix configuration file, follow the next steps:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /etc/postfix&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano main.cf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Go to the end of file and make the necessary changes to look like the next code:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;smtpd_relay_restrictions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;permit_mynetworks&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;permit_sasl_authenticated&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;defer_unauth_destination&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;myhostname&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ubuntu&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# your machine hostname&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;alias_maps&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;aliases&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;alias_database&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;aliases&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;myorigin&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mailname&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mydestination&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;localdomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;relayhost&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mynetworks&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;127.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# your network&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mailbox_size_limit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;recipient_delimiter&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_interfaces&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_protocols&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ipv4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# just use ipv4 protocol&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;home_mailbox&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Maildir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# define the root of mailbox&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Just save the file (&lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL+X&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;Y&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;Return&lt;/code&gt;) and restart postfix with this command: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service postfix restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;dovecot&quot;&gt;Dovecot&lt;/h3&gt;
+
+&lt;p&gt;At this point you have postfix configured and running. Now lets add &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol&quot;&gt;IMAP&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Post_Office_Protocol&quot;&gt;POP3&lt;/a&gt; protocols to our mail server. &lt;a href=&quot;http://www.dovecot.org/&quot;&gt;Dovecot&lt;/a&gt; is an open-source &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol&quot;&gt;IMAP&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Post_Office_Protocol&quot;&gt;POP3&lt;/a&gt; server for Linux/UNIX-like systems released in July 2002.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.dovecot.org/&quot;&gt;Dovecot&lt;/a&gt; developers primarily aim to produce a lightweight, fast and easy-to-set-up open-source mail server. According to &lt;a href=&quot;http://www.openemailsurvey.org/&quot;&gt;Openemailsurvey&lt;/a&gt; &lt;a href=&quot;http://www.dovecot.org/&quot;&gt;Dovecot&lt;/a&gt; has an installed base of over 2.9 million email servers all over the world and a global market share of 57% of all &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol&quot;&gt;IMAP&lt;/a&gt; servers. Next steps are install dovecot-imap, dovecot-pop3 and configure them.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install dovecot-imapd dovecot-pop3d -y&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;When it prompts to if you want to create a self-signed SSL certificate, choose yes and on next screen type the mail name that you choose a few steps before.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /etc/dovecot&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano dovecot.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Make this changes:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Add this lines&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;protocols&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;imap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pop3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;login_greeting&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Dovecot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd conf.d&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano 10-auth.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;disable_plaintext_auth&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;yes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Add login on this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;auth_mechanisms&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;plain&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano 10-mail.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Change this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mail_location&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;maildir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Maildir&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano 10-master.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;imap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_listener&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;imap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;143&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_listener&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;imaps&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#port = 993&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#ssl = yes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pop3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_listener&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pop3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inet_listener&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pop3s&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#port = 995&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#ssl = yes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Make the necessary changes to the next lines&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;unix_listener&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;userdb&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0600&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;postfix&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;postfix&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;With all this changes saved, you just need to restart dovecot with this command: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service dovecot restart&lt;/code&gt;. By executing the command &lt;code class=&quot;highlighter-rouge&quot;&gt;$ netstat -tnl&lt;/code&gt; you can see all machine ports that are listening:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/dovecot-netstat.png&quot; alt=&quot;dovecot netstat&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/dovecot-telnet.png&quot; alt=&quot;dovecot telnet&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now lets test this mail server with a email client. There are a lot of programs available on the internet but the most popular for linux are &lt;a href=&quot;https://www.mozilla.org/en-US/thunderbird/&quot;&gt;Thunderbird&lt;/a&gt;, &lt;a href=&quot;https://wiki.gnome.org/Apps/Evolution/&quot;&gt;Evolution&lt;/a&gt;, &lt;a href=&quot;https://wiki.gnome.org/Apps/Geary/&quot;&gt;Geary&lt;/a&gt; and &lt;a href=&quot;http://sylpheed.sraoss.jp/en/&quot;&gt;Sylpheed&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I choose Thunderbird because when you’re dealing with hundreds or thousands of emails every day, speed is a primary concern and this email client delivers. So open Thunderbird and configure your email account:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note that server hostname is relative to the machine that is running the mail server. So if you are setting up Thunderbird on the mail server machine, you can use 127.0.0.1. If not you need to input the IP of the mail server machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/thunderbird-config.png&quot; alt=&quot;thunderbird config&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/thunderbird-config-exception.png&quot; alt=&quot;thunderbird config&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;squirrelmail&quot;&gt;SquirrelMail&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://squirrelmail.org/&quot;&gt;SquirrelMail&lt;/a&gt; is a standards-based webmail package written in &lt;a href=&quot;https://www.php.net/&quot;&gt;PHP&lt;/a&gt;. It includes built-in pure &lt;a href=&quot;https://www.php.net/&quot;&gt;PHP&lt;/a&gt; support for the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol&quot;&gt;IMAP&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; protocols, and all pages render in pure HTML 4.0 (with no &lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript&quot;&gt;JavaScript&lt;/a&gt; required) for maximum compatibility across browsers.&lt;/p&gt;
+
+&lt;p&gt;It has very few requirements and is very easy to configure and install. Next step is to take our mail server to “next level” installing SquirrelMail test on browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install squirrelmail&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo cp /etc/squirrelmail/apache.conf /etc/apache2/sites-available/squirrelmail.conf&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano /etc/apache2/sites-available/squirrelmail.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment the next lines&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# change 1.2.3.4 to *:80&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DocumentRoot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;share&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;squirrelmail&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ServerName&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo a2ensite squirrelmail&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service apache2 restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;As we don’t have a DNS server on the system yet, just add the following line to your hosts file:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano /etc/hosts&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Add this line to the file&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;127.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;dr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pt&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now you are good to go test SquirrelMail on a web browser and type this url: &lt;code class=&quot;highlighter-rouge&quot;&gt;mail.linux.dr.pt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/squirrelmail-test.png&quot; alt=&quot;squirrelmail test&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One more step to make SquirrelMail page show our mail server name:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo squirrelmail-configure&lt;/code&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/squirrelmail-organization-preferences.png&quot; alt=&quot;squirrelmail organization&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/squirrelmail-server-settings.png&quot; alt=&quot;squirrelmail server&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/squirrelmail-test-edited.png&quot; alt=&quot;squirrelmail server&quot; /&gt;&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/squirrelmail-test.png"/&gt;</description>
         <pubDate>Mon, 18 Jan 2016 15:26:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/mail-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/mail-server-linux/</guid>
@@ -88,7 +524,60 @@
     
       <item>
         <title>Setup a FTP server - Linux</title>
-        <description>&lt;p&gt;The File Transfer Protocol (&lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt;) is a standard network protocol used to transfer computer files between a client and server on a computer network. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; is built on a client-server model architecture and uses separate control and data connections between the client and...&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
+        <description>&lt;p&gt;The File Transfer Protocol (&lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt;) is a standard network protocol used to transfer computer files between a client and server on a computer network. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; is built on a client-server model architecture and uses separate control and data connections between the client and the server. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; users may authenticate themselves with a clear-text sign-in protocol, normally in the form of a username and password, but can connect anonymously if the server is configured to allow it.&lt;/p&gt;
+
+&lt;h3 id=&quot;vsftpd&quot;&gt;VSFTPD&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://security.appspot.com/vsftpd.html&quot;&gt;Vsftpd&lt;/a&gt; is probably the most secure and fastest &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; server for UNIX-like systems. &lt;a href=&quot;https://security.appspot.com/vsftpd.html&quot;&gt;Vsftpd&lt;/a&gt; is a GPL licensed &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; server for UNIX systems, including Linux. It is secure and extremely fast. If your requirements from an &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; server are security, performance and stability, vsftpd is probably the &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FTP&lt;/a&gt; server you are looking for! So Lets get started with the installation:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get update&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install vsftpd&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that vsftpd is installed you just need to do a few changes on the vsftpd configuration file with this command: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano /etc/vsftpd.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this to enable any form of FTP write command.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;write_enable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Uncomment this to restrict local users to their home directory.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;chroot_local_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Add this next line to allow local users writes on their home directory.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;allow_writeable_chroot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;With this changes saved, restart vsftpd server with the folowing command to changes take effect on server: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service vsftpd restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;filezilla&quot;&gt;FileZilla&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FileZilla&lt;/a&gt; is a free &lt;a href=&quot;https://en.wikipedia.org/wiki/File_Transfer_Protocol&quot;&gt;FTP&lt;/a&gt; solution. Both a client and a server are available. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FileZilla&lt;/a&gt; is open source software distributed free of charge under the terms of the GNU General Public License. &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;FileZilla&lt;/a&gt; Client is a fast and reliable cross-platform &lt;a href=&quot;https://en.wikipedia.org/wiki/File_Transfer_Protocol&quot;&gt;FTP&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/FTPS&quot;&gt;FTPS&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol&quot;&gt;SFTP&lt;/a&gt; client with lots of useful features and an intuitive graphical user interface. Just download and install on your system to proceed. Once you open &lt;a href=&quot;https://filezilla-project.org/&quot;&gt;Filezilla&lt;/a&gt; Client, just type the host that as vsftpd running, your ftp username and password and press return key to make a connection to vsftpd server. Below is an example:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/filezilla-connection.png&quot; alt=&quot;filezilla connection&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Most of FTP servers available are configured by default to use passive FTP. If you dont know about active and passive FTP, you must read this web page &lt;a href=&quot;http://slacksite.com/other/ftp.html&quot;&gt;Active FTP vs. Passive FTP, a Definitive Explanation&lt;/a&gt;, all you need to know is explained there.
+So passive mode on vsftpd is enabled by default, but you can manually configure the interval of ports that server will use. You just need to add a couple lines into vsftpd configuration file.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# Add this lines to manually configure the interval of ports.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pasv_min_port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40000&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pasv_max_port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40100&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now just reconnect to vsftpd server with filezilla and check the connections on your machine with netstat.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ netstat -ant | grep 127.0.0.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/filezilla-netstat-linux.png&quot; alt=&quot;filezilla netstat linux&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -ant | grep 127.0.0.1&lt;/code&gt; command output show us the client connected to from port 34374 to port 21 of vsftpd server. This connection is for commands purpose only. For transfer data from server to client and vice-versa there is another connection between port 54531 and 40028. You can see port 40028 is contained in passive mode port interval configured on last step.&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
         <pubDate>Sun, 17 Jan 2016 22:36:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/ftp-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/ftp-server-linux/</guid>
@@ -104,7 +593,119 @@
     
       <item>
         <title>Setup a Apache server - Linux</title>
-        <description>&lt;p&gt;A web server processes requests via &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt;, the basic network protocol used to distribute information on the &lt;a href=&quot;https://en.wikipedia.org/wiki/World_Wide_Web&quot;&gt;World Wide Web&lt;/a&gt;. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server...&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
+        <description>&lt;p&gt;A web server processes requests via &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt;, the basic network protocol used to distribute information on the &lt;a href=&quot;https://en.wikipedia.org/wiki/World_Wide_Web&quot;&gt;World Wide Web&lt;/a&gt;. The primary function of a web server is to store, process and deliver web pages to clients. The communication between client and server takes place using the Hypertext Transfer Protocol (&lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;apache&quot;&gt;Apache&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://httpd.apache.org/&quot;&gt;Apache&lt;/a&gt; HTTP Server is the world’s most used web server software. Apache played a key role in the initial growth of the &lt;a href=&quot;https://en.wikipedia.org/wiki/World_Wide_Web&quot;&gt;World Wide Web&lt;/a&gt;. In 2009, it became the first web server software to serve more than 100 million &lt;a href=&quot;https://en.wikipedia.org/wiki/Website&quot;&gt;websites&lt;/a&gt;. Lets start installing Apache by opening terminal (console) and type de following commands:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get update&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo apt-get install apache2 -y&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that is installed you can go to your favorite browser and type &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost&lt;/code&gt; on the url text box. It should show something like the image below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/apache-default-page.png&quot; alt=&quot;apache default page&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next step is editing the html file that are being delivered by apache server:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /var/www/html&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo cp index.html index2.html&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano index.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Open a text editor of your choice and code some HTML on it like the following:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Web Server - RSC&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Web Server - RSC&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;YOUR NAME&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Redes e Serviços de Comunicação&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Copy and paste the code to the terminal and them save by doing this keyboard combinations: &lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL+X&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Y&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Return&lt;/code&gt;. Now go to the browser again and refresh the webpage (127.0.0.1 or localhost). Should return something like the image below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/apache-edited-page.png&quot; alt=&quot;apache edited page&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now if you want to change the port that apache is listening for http requests then follow the commands below:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ cd /etc/apache2&lt;/code&gt; &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano ports.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# If you just change the port or add more ports here, you will likely also&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# have to change the VirtualHost statement in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# /etc/apache2/sites-enabled/000-default.conf&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3355&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# change to what you want&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;IfModule&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ssl_module&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;IfModule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;IfModule&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mod_gnutls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;IfModule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then you need to change one more thing in the &lt;code class=&quot;highlighter-rouge&quot;&gt;000-default.conf&lt;/code&gt; file in sites-available directory:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo nano sites-available/000-default.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-applescript&quot; data-lang=&quot;applescript&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3355&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# change to the same port that you edit on ports.conf&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ServerAdmin&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;webmaster&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DocumentRoot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ErrorLog&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;APACHE_LOG_DIR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CustomLog&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;APACHE_LOG_DIR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;combined&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Just before you test apache on the new port you need to restart apache service with the following command &lt;code class=&quot;highlighter-rouge&quot;&gt;$ sudo service apache2 restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/apache-restart-linux.png&quot; alt=&quot;apache restart linux&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now on the browser you just add :3355 to the end of url (127.0.0.1 or localhost) and it will present the same web page edited in a few steps before.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/apache-edited-port.png&quot; alt=&quot;apache edited port&quot; /&gt;&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
         <pubDate>Sat, 16 Jan 2016 18:15:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/web-server-linux/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/web-server-linux/</guid>
@@ -120,7 +721,107 @@
     
       <item>
         <title>Protocol Stack</title>
-        <description>&lt;p&gt;The protocol stack is an implementation of a computer networking protocol suite. The suite is the definition of the protocols, and the stack is the software implementation of them. In practical, protocol stacks are divided into three major sections: media, transport, and applications. Lets see...&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
+        <description>&lt;p&gt;The protocol stack is an implementation of a computer networking protocol suite. The suite is the definition of the protocols, and the stack is the software implementation of them. In practical, protocol stacks are divided into three major sections: media, transport, and applications. Lets see an example protocol stack and the corresponding layers:&lt;/p&gt;
+
+&lt;table class=&quot;table-center&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Protocol&lt;/th&gt;
+      &lt;th&gt;Layer&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;HTTP&lt;/td&gt;
+      &lt;td&gt;Application&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TCP&lt;/td&gt;
+      &lt;td&gt;Transport&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;IP&lt;/td&gt;
+      &lt;td&gt;Network&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ethernet&lt;/td&gt;
+      &lt;td&gt;Data Link&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;IEEE 802.3u&lt;/td&gt;
+      &lt;td&gt;Physical&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;ping&quot;&gt;Ping&lt;/h3&gt;
+
+&lt;p&gt;To check if two computers can communicate with each other, you can execute one simple command on the shell: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ ping ip.from.computer.two&lt;/code&gt; . It outputs ping requests and at the end print the result of the requests with how much have sent and received, resulting on the percentage of packets received.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/ping-command.png&quot; alt=&quot;ping command&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;wireshark&quot;&gt;Wireshark&lt;/h3&gt;
+
+&lt;p&gt;There is a lot of software available on the web with the purpose of analyzing packets on the network. &lt;a href=&quot;https://www.wireshark.org&quot;&gt;Wireshark&lt;/a&gt; is a free open-source packet analyzer, originally called &lt;strong&gt;Ethereal&lt;/strong&gt; that is used for network troubleshooting, analysis, software and communications protocol development, and education. Its cross-platform and uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Pcap&quot;&gt;pcap&lt;/a&gt; to capture packets.&lt;/p&gt;
+
+&lt;p&gt;Below you can see the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol&quot;&gt;ICMP&lt;/a&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_packet&quot;&gt;packets&lt;/a&gt; transported between the hosts on Wireshark.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/ping-wireshark.png&quot; alt=&quot;ping wireshark&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With a web browser (&lt;a href=&quot;https://www.google.com/chrome/browser/desktop/index.html&quot;&gt;Chrome&lt;/a&gt;, &lt;a href=&quot;https://www.mozilla.org/en-US/firefox/new/&quot;&gt;Firefox&lt;/a&gt;, &lt;a href=&quot;http://www.opera.com/&quot;&gt;Opera&lt;/a&gt;, &lt;a href=&quot;http://www.apple.com/safari/&quot;&gt;Safari&lt;/a&gt;, etc) you can access to a tone of web pages available on the internet. The communication between the client (web browser) and the server (&lt;a href=&quot;https://httpd.apache.org/&quot;&gt;Apache&lt;/a&gt;, &lt;a href=&quot;http://nginx.org/&quot;&gt;Nginx&lt;/a&gt;, etc) is done by the &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; (Hypertext Transfer Protocol) protocol. The client send a &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; request to the server and wait for a &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; reply from the server too.&lt;/p&gt;
+
+&lt;p&gt;If the destination server isn’t listening for &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; requests then all the requests will be dropped by server, the client wont receive any reply and will show on the web browser that the server didn’t reply. Let’s see &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_packet&quot;&gt;packets&lt;/a&gt; from a communication between a client and this blog in Wireshark.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/http-wireshark.png&quot; alt=&quot;http wireshark&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;traceroute&quot;&gt;Traceroute&lt;/h3&gt;
+
+&lt;p&gt;There are some &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; status codes that we can identify for example status code 200 - means that request has succeeded, status code 304 - means the file we are requesting for has not changed since last time, so if is in cache than the browser will show the file right away and is not necessary to download the file again.&lt;/p&gt;
+
+&lt;p&gt;When a computer send a &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;HTTP&lt;/a&gt; request for example to www.apple.com, the request goes in a route (path) until it arrive the destination host (www.apple.com). This route (path)  can be different each time the source host communicate with destination host.&lt;/p&gt;
+
+&lt;p&gt;So to see this route (path), you can use the diagnostic tool called &lt;code class=&quot;highlighter-rouge&quot;&gt;traceroute&lt;/code&gt; on Linux or &lt;code class=&quot;highlighter-rouge&quot;&gt;tracert&lt;/code&gt; on Windows and it will something like the screenshot below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/traceroute-linux.png&quot; alt=&quot;traceroute linux&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;netstat&quot;&gt;Netstat&lt;/h3&gt;
+
+&lt;p&gt;When a computer has servers installed like &lt;a href=&quot;https://httpd.apache.org/&quot;&gt;Apache&lt;/a&gt;, &lt;a href=&quot;http://www.bind9.net/&quot;&gt;Bind&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Domain_Name_System&quot;&gt;DNS&lt;/a&gt; Server, etc, there is a number of ports of the host that will be open and listening from incoming connections from clients.&lt;/p&gt;
+
+&lt;p&gt;So on the image below you can see all the ports of all the servers running on the machine by executing the following command on the console &lt;code class=&quot;highlighter-rouge&quot;&gt;$ netstat -tnl&lt;/code&gt;, this command is more specific to Operative Systems based on Linux. For Windows OS you can execute this command &lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -a&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/netstat-linux.png&quot; alt=&quot;netstat linux&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the image you can see a lot of ports listening on the machine like 110 that is the default port for &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol&quot;&gt;IMAP&lt;/a&gt; server, 25 that is the port for &lt;a href=&quot;https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&quot;&gt;SMTP&lt;/a&gt; server, 21 for &lt;a href=&quot;https://en.wikipedia.org/wiki/File_Transfer_Protocol&quot;&gt;FTP&lt;/a&gt; server and other. You can do a search on Google to find the server behind each port and just to be clear all ports are the default for each server that is running.&lt;/p&gt;
+
+&lt;h3 id=&quot;interfaces-configurations&quot;&gt;Interfaces configurations&lt;/h3&gt;
+
+&lt;p&gt;All computers that are connected to a network need to have at least two parameters configured on the network interface. These parameters are &lt;a href=&quot;https://en.wikipedia.org/wiki/IP_address&quot;&gt;IP Address&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Subnetwork&quot;&gt;Subnet Mask&lt;/a&gt;, the IP Address is pretty most self explanatory, its an address to computer like your home address and its unique on the network.&lt;/p&gt;
+
+&lt;p&gt;The Subnet Mask tells computer to which network belong. To show the configurations of the network interfaces on console, just execute &lt;code class=&quot;highlighter-rouge&quot;&gt;$ ifconfig&lt;/code&gt; on Linux and &lt;code class=&quot;highlighter-rouge&quot;&gt;$ ipconfig&lt;/code&gt; on Windows.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/ifconfig-linux.png&quot; alt=&quot;ifconfig linux&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/ipconfig-windows-new.png&quot; alt=&quot;ipconfig windows&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;netsh&quot;&gt;Netsh&lt;/h3&gt;
+
+&lt;p&gt;Netsh, or network shell, is a command-line utility included in &lt;a href=&quot;https://en.wikipedia.org/wiki/Microsoft_Windows&quot;&gt;Microsoft’s Windows&lt;/a&gt; NT line of operating systems beginning with Windows 2000. It allows local or remote configuration of network devices such as the interface.&lt;/p&gt;
+
+&lt;p&gt;A common use of netsh is to reset the &lt;a href=&quot;https://en.wikipedia.org/wiki/Internet_protocol_suite&quot;&gt;TCP/IP&lt;/a&gt; stack to default. Netsh, among many other things, also allows the user to change / show the IP address on their machine. For example if you run the command &lt;code class=&quot;highlighter-rouge&quot;&gt;netsh interface ip show config&lt;/code&gt; will show the interfaces configuration like the image below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/netsh-windows-new.png&quot; alt=&quot;netsh windows&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;route&quot;&gt;Route&lt;/h3&gt;
+
+&lt;p&gt;Every host connected to a network has a &lt;a href=&quot;https://en.wikipedia.org/wiki/Routing_table&quot;&gt;IP routing table&lt;/a&gt;. To show / manipulate the IP routing table you just need to user the &lt;code class=&quot;highlighter-rouge&quot;&gt;route&lt;/code&gt; command on the console. In Linux you just execute &lt;code class=&quot;highlighter-rouge&quot;&gt;$ route -n&lt;/code&gt; and it prints out the host routing table like below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/route-linux.png&quot; alt=&quot;route linux&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In Windows is a little bit different but same result, just execute &lt;code class=&quot;highlighter-rouge&quot;&gt;route print -4&lt;/code&gt; on your &lt;a href=&quot;https://en.wikipedia.org/wiki/Command-line_interface&quot;&gt;Command Prompt&lt;/a&gt; and will print out something like the image below.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/assets/img/route-windows-new.png&quot; alt=&quot;route windows&quot; /&gt;&lt;/p&gt;
+&lt;img src="https://networktips.github.io/assets/img/"/&gt;</description>
         <pubDate>Fri, 15 Jan 2016 21:10:01 +0000</pubDate>
         <link>https://networktips.github.io/articles/protocol-stack/</link>
         <guid isPermaLink="true">https://networktips.github.io/articles/protocol-stack/</guid>
